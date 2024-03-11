@@ -22,11 +22,13 @@ public class studentinfoEntity {
     private String password;
     private String confirmpassword;
     private String studentName;
-    private int studentBatch;
+    private String studentBatch;
     private String studentDegree;
-    private String studentBranch;
+    private String studentDepartment;
     private int studentRegulation;
+    private String studentRollno;
     private String studentRegistrationno;
+    private String studentClassadvisor;
     private Date studentDateofjoining;
     private String studentQuota;
 

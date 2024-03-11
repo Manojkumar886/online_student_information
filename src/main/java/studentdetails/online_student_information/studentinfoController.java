@@ -1,7 +1,10 @@
 package studentdetails.online_student_information;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -24,4 +27,13 @@ public class studentinfoController {
         return service.makecreate(studentdetails).getStudentName() + " has been added in your database";
     }
 
+    @GetMapping("/list")
+    public List<studentinfoEntity> listall() {
+        return service.makeall();
+    }
+
+    @GetMapping("/readone/{mailid}")
+    public studentinfoEntity readone(@PathVariable("mailid") String mailid) {
+        return service.makereadone(mailid);
+    }
 }
