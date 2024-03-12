@@ -22,4 +22,15 @@ public class studentinfoService {
     public studentinfoEntity makereadone(String mailid) {
         return repo.findById(mailid).orElse(new studentinfoEntity());
     }
+
+    public String remove(String mailid) {
+        // repo.deleteById(mailid);
+        studentinfoEntity temp = repo.findById(mailid).orElse(new studentinfoEntity());
+        repo.delete(temp);
+        return temp.getStudentName() + " has been deleted successfully";
+    }
+
+    public List<studentinfoEntity> findbyCA(String ca) {
+        return repo.findByStudentClassadvisor(ca);
+    }
 }
