@@ -33,4 +33,8 @@ public class studentinfoService {
     public List<studentinfoEntity> findbyCA(String ca) {
         return repo.findByStudentClassadvisor(ca);
     }
+
+    public void updatedepartmentbyclassadvisor(String dept) {
+        repo.updateByStudentClassadvisor(dept);
+    }
 }

@@ -9,11 +9,13 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-// http://localhost:8080
+// http://localhost:8080/myproject
 
 @RestController
+@RequestMapping("/myproject")
 public class studentinfoController {
 
     @Autowired
@@ -54,5 +56,10 @@ public class studentinfoController {
     @GetMapping("/findbyca/{CA}")
     public List<studentinfoEntity> findbyCA(@PathVariable("CA") String CA) {
         return service.findbyCA(CA);
+    }
+
+    @PutMapping("/updatedept/{newdept}")
+    public void putMethodName(@PathVariable("newdept") String newdept) {
+        service.updatedepartmentbyclassadvisor(newdept);
     }
 }
