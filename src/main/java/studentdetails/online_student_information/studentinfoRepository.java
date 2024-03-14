@@ -20,4 +20,6 @@ public interface studentinfoRepository extends JpaRepository<studentinfoEntity, 
     @Modifying(flushAutomatically = true, clearAutomatically = true)
     @Query(value = "UPDATE studentinformation stu SET stu.student_department=?EEE where stu.student_classadvisor=:userchoose", nativeQuery = true)
     public void updateByStudentClassadvisor(String userchoose);
+
+    public studentinfoEntity findByUsername(String username);
 }

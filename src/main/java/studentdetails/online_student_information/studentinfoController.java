@@ -3,6 +3,7 @@ package studentdetails.online_student_information;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -21,6 +22,9 @@ public class studentinfoController {
     @Autowired
     studentinfoService service;
 
+    @Autowired
+    PasswordEncoder encoder;
+
     @GetMapping("/")
     public void run() {
         System.out.println(" welcome to online student registration project...!");
@@ -28,6 +32,10 @@ public class studentinfoController {
 
     @PostMapping("/create")
     public String creation(@RequestBody studentinfoEntity studentdetails) {
+        // studentdetails.password(manojkumar)
+        String temp = encoder.encode(studentdetails.getPassword()); // manojkmar--$jdhdidhdhuhu7875675hdhgd52
+
+        studentdetails.setPassword(temp);
         return service.makecreate(studentdetails).getStudentName() + " has been added in your database";
     }
 

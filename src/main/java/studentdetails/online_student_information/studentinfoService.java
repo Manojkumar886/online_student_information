@@ -4,10 +4,13 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 @Service
-public class studentinfoService {
+public class studentinfoService implements UserDetailsService {
     @Autowired
     studentinfoRepository repo;
 
@@ -36,5 +39,17 @@ public class studentinfoService {
 
     public void updatedepartmentbyclassadvisor(String dept) {
         repo.updateByStudentClassadvisor(dept);
+    }
+
+    // predefined no implement method (userdetailsservice interface class)
+    @Override
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        studentinfoEntity studentdetails = repo.findByUsername(username);
+
+        if (studentdetails == null) {
+            throw new UnsupportedOperationException("username not found..please enter correct username..!");
+        }
+        ;
+        return studentdetails;
     }
 }
