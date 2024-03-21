@@ -47,8 +47,6 @@ public class My_Authentication {
     @Bean
     public SecurityFilterChain connection(HttpSecurity hs) throws Exception {
         hs.authorizeRequests().requestMatchers("/myproject/**").authenticated();
-
-        hs.cors();
         hs.csrf().disable();
         hs.formLogin();
         hs.httpBasic();

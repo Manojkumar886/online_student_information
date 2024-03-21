@@ -41,6 +41,10 @@ public class studentinfoService implements UserDetailsService {
         repo.updateByStudentClassadvisor(dept);
     }
 
+    public studentinfoEntity gettingByNumberExact(String emailid) {
+        return repo.findById(emailid).orElse(new studentinfoEntity());
+    }
+
     // predefined no implement method (userdetailsservice interface class)
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {

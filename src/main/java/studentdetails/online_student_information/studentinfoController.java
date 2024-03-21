@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/myproject")
+@CrossOrigin(origins = "http://localhost:3000")
 public class studentinfoController {
 
     @Autowired
@@ -34,9 +36,14 @@ public class studentinfoController {
     public String creation(@RequestBody studentinfoEntity studentdetails) {
         // studentdetails.password(manojkumar)
         String temp = encoder.encode(studentdetails.getPassword()); // manojkmar--$jdhdidhdhuhu7875675hdhgd52
-
         studentdetails.setPassword(temp);
         return service.makecreate(studentdetails).getStudentName() + " has been added in your database";
+    }
+
+    @GetMapping("/get/{emailid}")
+    public studentinfoEntity callAllByAcc(@PathVariable("emailid") String emailid) {
+        studentinfoEntity t = service.gettingByNumberExact(emailid);
+        return t;
     }
 
     @GetMapping("/list")
