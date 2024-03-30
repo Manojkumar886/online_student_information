@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.RequestParam;
 
 // http://localhost:8080/myproject
 
@@ -64,6 +65,7 @@ public class studentinfoController {
     @PutMapping("/update")
     public String updating(@RequestBody studentinfoEntity studentdetails) {
         studentinfoEntity temp = studentdetails;
+        temp.setPassword(encoder.encode(temp.getPassword()));
 
         return service.makecreate(temp).getStudentRegistrationno() + "has been updated successfully";
     }
@@ -76,5 +78,53 @@ public class studentinfoController {
     @PutMapping("/updatedept/{newdept}")
     public void putMethodName(@PathVariable("newdept") String newdept) {
         service.updatedepartmentbyclassadvisor(newdept);
+    }
+
+    @GetMapping("/{user}")
+    public studentinfoEntity purpose(@PathVariable("user") String user) {
+        studentinfoEntity student = (studentinfoEntity) service.loadUserByUsername(user);
+        return student;
+    }
+
+    // Personal Details REST APIS
+    @Autowired
+    personalinfoService pserv;
+
+    @PostMapping("/createpersonal")
+    public personalinfoEntity createperPersonalinfoEntity(@RequestBody personalinfoEntity personaldetails) {
+        System.out.println(personaldetails);
+        pserv.createpersonal(personaldetails);
+        return personaldetails;
+    }
+
+    @PutMapping("/updatepersonal")
+    public personalinfoEntity updatepPersonalinfoEntity(@RequestBody personalinfoEntity personaldetails) {
+        return pserv.createpersonal(personaldetails);
+    }
+
+    @GetMapping("/readonepersonalinfo/{mailid}")
+    public personalinfoEntity readonepersonalinfo(@PathVariable("mailid") String mailid) {
+        return pserv.makereadone(mailid);
+    }
+
+    // SCHOOL DETAILS REST APIS
+    @Autowired
+    schooldetailsService sserv;
+
+    @PostMapping("/createschool")
+    public schooldetailsEntity createschooldetails(@RequestBody schooldetailsEntity schooldetails) {
+        System.out.println(schooldetails);
+        sserv.createschooldetails(schooldetails);
+        return schooldetails;
+    }
+
+    @PutMapping("/updateschool")
+    public schooldetailsEntity updatepschooldetails(@RequestBody schooldetailsEntity schooldetailsEntity) {
+        return sserv.createschooldetails(schooldetailsEntity);
+    }
+
+    @GetMapping("/readschoolinfo/{mailid}")
+    public schooldetailsEntity readoneschoolinfo(@PathVariable("mailid") String mailid) {
+        return sserv.makereadone(mailid);
     }
 }

@@ -48,6 +48,7 @@ public class My_Authentication {
     public SecurityFilterChain connection(HttpSecurity hs) throws Exception {
         hs.authorizeRequests().requestMatchers("/myproject/**").authenticated();
         hs.csrf().disable();
+        hs.cors();
         hs.formLogin();
         hs.httpBasic();
 
