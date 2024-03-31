@@ -64,10 +64,8 @@ public class studentinfoController {
 
     @PutMapping("/update")
     public String updating(@RequestBody studentinfoEntity studentdetails) {
-        studentinfoEntity temp = studentdetails;
-        temp.setPassword(encoder.encode(temp.getPassword()));
 
-        return service.makecreate(temp).getStudentRegistrationno() + "has been updated successfully";
+        return service.makecreate(studentdetails).getStudentRegistrationno() + "has been updated successfully";
     }
 
     @GetMapping("/findbyca/{CA}")
